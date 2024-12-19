@@ -31,10 +31,22 @@ bot.start((ctx) => {
 });
 
 // Команда /catalog
-bot.command('catalog', (ctx) => {
-    ctx.reply(
-        getCoods().then(data => 'got it').then(res => JSON.stringify(res))
-    );
+bot.command('catalog', async (ctx) => {
+
+    try {
+        const data = await getCoods();
+
+        // Формируем сообщение с товарами
+        if (data && data.length > 0) {
+            const productsList = data.map(product => product.id + ':' + product.name + '-' + product.price + '₽' + `\n`);
+            ctx.reply(`Список товаров:\n${productsList}`);
+        } else {
+            ctx.reply('Каталог пуст.');
+        }
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+        ctx.reply('Произошла ошибка при получении каталога. Попробуйте позже.');
+    }
 });
 
 // Команда /search
