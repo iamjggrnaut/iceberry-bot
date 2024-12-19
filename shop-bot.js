@@ -11,9 +11,7 @@ const getCoods = async () => {
         }
     })
     const data = await res.json()
-    return (
-        data && data.map(item => item.name)
-    )
+    return data
 }
 
 // Команда /start
@@ -35,7 +33,7 @@ bot.start((ctx) => {
 // Команда /catalog
 bot.command('catalog', (ctx) => {
     ctx.reply(
-        getCoods()
+        getCoods().then(data => data.map(item => item.name))
     );
 });
 
