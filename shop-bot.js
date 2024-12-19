@@ -14,7 +14,7 @@ const getCoods = async () => {
     return data
 }
 
-const products = []
+const products = getCoods().then(data => { return data })
 
 // Команда /start
 bot.start((ctx) => {
@@ -35,8 +35,7 @@ bot.start((ctx) => {
 // Команда /catalog
 bot.command('catalog', (ctx) => {
     ctx.reply(
-        getCoods().then(data => products = data),
-        products.map(item => item.name)
+        JSON.stringify(products)
     );
 });
 
