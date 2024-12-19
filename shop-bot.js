@@ -46,7 +46,7 @@ bot.command('catalog', async (ctx) => {
             ctx.reply(`Список товаров:\n${productsList}`);
         } else {
             console.log(data);
-            ctx.reply('Каталог полон.');
+            ctx.reply('Каталог пуст.');
         }
     } catch (error) {
         console.error('Ошибка при получении данных:', error);
