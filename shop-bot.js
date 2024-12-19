@@ -14,7 +14,7 @@ const getCoods = async () => {
     return data
 }
 
-const products = getCoods().then(data => { return data })
+const products = await getCoods()
 
 // Команда /start
 bot.start((ctx) => {
