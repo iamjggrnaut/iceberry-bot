@@ -7,7 +7,7 @@ const getCoods = async () => {
     const res = await fetch('https://iceberryshop.ru/api/product/all', {
         method: 'GET',
         headers: {
-            'content-type': 'application.json'
+            'content-type': 'application/json'
         }
     })
     const data = await res.json()
