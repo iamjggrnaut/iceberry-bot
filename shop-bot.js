@@ -35,7 +35,7 @@ bot.start((ctx) => {
 // Команда /catalog
 bot.command('catalog', (ctx) => {
     ctx.reply(
-
+        getCoods()
     );
 });
 
