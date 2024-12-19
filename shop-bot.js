@@ -33,7 +33,7 @@ bot.start((ctx) => {
 // Команда /catalog
 bot.command('catalog', (ctx) => {
     ctx.reply(
-        getCoods().then(data => 'got it')
+        getCoods().then(data => 'got it').then(res => JSON.stringify(res))
     );
 });
 
