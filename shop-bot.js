@@ -3,6 +3,19 @@ const { Telegraf } = require('telegraf');
 // Замените 'YOUR_BOT_TOKEN' на токен вашего бота
 const bot = new Telegraf('8026160087:AAE_s7_9tChz_njiq9QbYV-_VvDZ8Y-tC0s');
 
+const getCoods = async () => {
+    const res = await fetch('https://iceberryshop.ru/api/product/all', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application.json'
+        }
+    })
+    const data = await res.json()
+    return (
+        data && data.map(item => item.name)
+    )
+}
+
 // Команда /start
 bot.start((ctx) => {
     ctx.reply('Добро пожаловать в наш интернет-магазин! Используйте команды для навигации:\n\n' +
@@ -21,7 +34,9 @@ bot.start((ctx) => {
 
 // Команда /catalog
 bot.command('catalog', (ctx) => {
-    ctx.reply('Вот наш каталог товаров:\n1. Товар A\n2. Товар B\n3. Товар C');
+    ctx.reply(
+
+    );
 });
 
 // Команда /search
