@@ -14,8 +14,6 @@ const getCoods = async () => {
     return data
 }
 
-const products = await getCoods()
-
 // Команда /start
 bot.start((ctx) => {
     ctx.reply('Добро пожаловать в наш интернет-магазин! Используйте команды для навигации:\n\n' +
@@ -35,7 +33,7 @@ bot.start((ctx) => {
 // Команда /catalog
 bot.command('catalog', (ctx) => {
     ctx.reply(
-        JSON.stringify(products)
+        getCoods().then(data => 'got it')
     );
 });
 
