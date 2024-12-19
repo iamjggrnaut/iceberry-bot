@@ -14,6 +14,8 @@ const getCoods = async () => {
     return data
 }
 
+const products = []
+
 // Команда /start
 bot.start((ctx) => {
     ctx.reply('Добро пожаловать в наш интернет-магазин! Используйте команды для навигации:\n\n' +
@@ -33,7 +35,8 @@ bot.start((ctx) => {
 // Команда /catalog
 bot.command('catalog', (ctx) => {
     ctx.reply(
-        getCoods().then(data => data.map(item => item.name))
+        getCoods().then(data => products = data),
+        products.map(item => item.name)
     );
 });
 
