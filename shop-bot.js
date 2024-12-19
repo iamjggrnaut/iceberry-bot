@@ -4,7 +4,7 @@ const { Telegraf } = require('telegraf');
 const bot = new Telegraf('8026160087:AAE_s7_9tChz_njiq9QbYV-_VvDZ8Y-tC0s');
 
 const getCoods = async () => {
-    const res = await fetch('https://iceberryshop.ru/api/product/all', {
+    const res = await fetch('http://localhost:5000/api/product/all', {
         method: 'GET',
         headers: {
             'content-type': 'application/json'
@@ -17,17 +17,19 @@ const getCoods = async () => {
 // Команда /start
 bot.start((ctx) => {
     ctx.reply('Добро пожаловать в наш интернет-магазин! Используйте команды для навигации:\n\n' +
-        '/catalog - Посмотреть каталог товаров\n' +
-        '/search - Найти товар\n' +
-        '/cart - Просмотреть корзину\n' +
-        '/add_to_cart [product_id] - Добавить товар в корзину\n' +
-        '/remove_from_cart [product_id] - Удалить товар из корзины\n' +
-        '/checkout - Оформить заказ\n' +
-        '/order_status [order_id] - Проверить статус заказа\n' +
-        '/contact_support - Связаться с поддержкой\n' +
-        '/promotions - Узнать о текущих акциях\n' +
-        '/profile - Просмотреть профиль\n' +
-        '/help - Получить помощь');
+        '/catalog - Посмотреть каталог товаров\n'
+        // +
+        // '/search - Найти товар\n' +
+        // '/cart - Просмотреть корзину\n' +
+        // '/add_to_cart [product_id] - Добавить товар в корзину\n' +
+        // '/remove_from_cart [product_id] - Удалить товар из корзины\n' +
+        // '/checkout - Оформить заказ\n' +
+        // '/order_status [order_id] - Проверить статус заказа\n' +
+        // '/contact_support - Связаться с поддержкой\n' +
+        // '/promotions - Узнать о текущих акциях\n' +
+        // '/profile - Просмотреть профиль\n' +
+        // '/help - Получить помощь'
+    );
 });
 
 // Команда /catalog
@@ -36,12 +38,15 @@ bot.command('catalog', async (ctx) => {
     try {
         const data = await getCoods();
 
+
+
         // Формируем сообщение с товарами
         if (data && data.length > 0) {
-            const productsList = data.map(product => product.id + ':' + product.name + '-' + product.price + '₽' + `\n`);
+            const productsList = data.map(product => product.id + ': ' + product.name + ' - ' + product.stock + ' шт на складе').join(`\n`);
             ctx.reply(`Список товаров:\n${productsList}`);
         } else {
-            ctx.reply('Каталог пуст.');
+            console.log(data);
+            ctx.reply('Каталог полон.');
         }
     } catch (error) {
         console.error('Ошибка при получении данных:', error);
