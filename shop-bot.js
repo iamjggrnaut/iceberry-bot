@@ -42,7 +42,7 @@ bot.command('catalog', async (ctx) => {
 
         // Формируем сообщение с товарами
         if (data && data.length > 0) {
-            const productsList = data.map(product => product.id + ': ' + product.name + ' - ' + Number(product.stock) / 1000 + ' кг на складе').join(`\n`);
+            const productsList = data.map(product => product.name + ' - ' + Number(product.stock) / 1000 + ' кг на складе').join(`\n`);
             ctx.reply(`Список товаров:\n${productsList}`);
         } else {
             console.log(data);
